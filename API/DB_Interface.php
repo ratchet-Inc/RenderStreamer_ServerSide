@@ -1,12 +1,13 @@
 <?php
 
-define("CORE_API_PATH", "python ./Core/CoreClient.py", false);
+define("CORE_API_PATH", "python ./API/Core/CoreClient.py", false);
 define("DB_HOST", "localhost", false);
 define("DB_KEY", "Z4QC6KAM9WrXsm58jkXtoOfXVaN82LSrxtkJXzK0NP87nftNtGw2dieFJBDW99Ri", false);
 define("DB_NAME", "stream", false);
 
-function GetNextFrame($debug = False){
+function CacheCmd($cmd, $debug = False){
 	$reVal = json_decode('{"status":500, "msg": "unknown error"}');
+	$params = "$cmd -k ".DB_KEY." -n ".DB_NAME;
 	try{
 		$path = CORE_API_PATH;
 		$host = DB_HOST;
@@ -24,7 +25,7 @@ function GetNextFrame($debug = False){
         }
 		$x = count($res);
 		if($x == 0){
-			$r->msg = "cache failure";
+			$reVal->msg = "cache failure";
 			return $reVal;
 		}
 		if($debug){
@@ -40,6 +41,16 @@ function GetNextFrame($debug = False){
 		$reVal->msg = $e->getMessage();
 	}
 	return $reVal;
+}
+
+function GetNextFrame($debug = False){
+	$cmd = "--read2 -ul 2 -ll 0";
+	return CacheCmd($cmd, $debug);
+}
+
+function GetCacheInfo($debug = False){
+	$cmd = "--info";
+	return CacheCmd($cmd, $debug);
 }
 
 ?>
