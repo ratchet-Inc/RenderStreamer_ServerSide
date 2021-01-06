@@ -1,1 +1,1 @@
-xcopy %cd% F:\Apache24\htdocs\RenderStream /y
+xcopy %cd% F:\Apache24\htdocs\RenderStream /y /e /w /exclude:%cd%\exportIgnore.txt
