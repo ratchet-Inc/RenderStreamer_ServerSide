@@ -33,7 +33,7 @@ function CacheCmd($cmd, $debug = False){
 		}
 		$obj = json_decode($res[$x - 1]);
 		if(!isset($obj->status)){
-			$obj->status = "200";
+			$obj->status = 200;
 		}
 		return $obj;
 	} catch(Exception $e){
@@ -43,8 +43,8 @@ function CacheCmd($cmd, $debug = False){
 	return $reVal;
 }
 
-function GetNextFrame($debug = False){
-	$cmd = "--read2 -ul 2 -ll 0";
+function GetNextFrame($lowerLimit, $upperLimit, $debug = False){
+	$cmd = "--read2 -ul $upperLimit -ll $lowerLimit";
 	return CacheCmd($cmd, $debug);
 }
 
