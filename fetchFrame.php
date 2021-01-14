@@ -39,7 +39,7 @@ if(!isset($_SESSION[SESSION_NAME][R_CACHE_NAME]->currentFrame)){
 	return 1;
 }
 $lowL = $_SESSION[SESSION_NAME][R_CACHE_NAME]->currentFrame;
-$uppL = $_SESSION[SESSION_NAME][R_CACHE_NAME]->currentFrame + 9;
+$uppL = $_SESSION[SESSION_NAME][R_CACHE_NAME]->currentFrame + 12;
 $resp = GetNextFrame($lowL, $uppL);
 if($resp->status != 200){
 	echo '{"msg":"failed to get frame", "status": 500}';
