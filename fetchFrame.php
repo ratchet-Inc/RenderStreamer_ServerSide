@@ -18,10 +18,6 @@ if(isset($_SESSION[SESSION_NAME][R_CACHE_NAME]) == false){
 		for($i = 0; $i < count($cacheInfo); $i++){
 			if($cacheInfo[$i]->len != 0){
 				$index = $i;
-				/*echo "upperlimit = ".$cacheInfo[$i]->ul."\n";
-				echo "lowerlimit = ".$cacheInfo[$i]->ll."\n";
-				$mid = $cacheInfo[$i]->ll + ceil(($cacheInfo[$index]->ul - $cacheInfo[$index]->ll) / 2);
-				echo "mid point: $mid\n";*/
 				break;
 			}
 		}
@@ -50,7 +46,7 @@ if(count($resp->res) == 0){
 	echo '{"msg":"buffer info request queued", "status": 200}';
 	return 0;
 }
-$_SESSION[SESSION_NAME][R_CACHE_NAME]->currentFrame++;
+$_SESSION[SESSION_NAME][R_CACHE_NAME]->currentFrame = $resp->res[count($resp->res)]->_;
 echo json_encode($resp);
 
 return 0;
